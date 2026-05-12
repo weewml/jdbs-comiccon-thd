@@ -1,4 +1,44 @@
 package com.comiccon.model;
 
+import java.time.LocalDate;
+
+/**
+ * Фестиваль.
+ */
 public class Fest {
+    private int eventId;
+    private int companyId;
+    private int performanceId;
+    private String address;
+    private LocalDate date;
+
+    public Fest() { }
+
+    public Fest(int eventId, int companyId, int performanceId, String address, LocalDate date) {
+        this.eventId = eventId;
+        this.companyId = companyId;
+        this.performanceId = performanceId;
+        this.address = address;
+        this.date = date;
+    }
+
+    public Fest(int companyId, int performanceId, String address, LocalDate date) {
+        this(0, companyId, performanceId, address, date);
+    }
+
+    public int getEventId() { return eventId; }
+    public void setEventId(int eventId) { this.eventId = eventId; }
+    public int getCompanyId() { return companyId; }
+    public void setCompanyId(int companyId) { this.companyId = companyId; }
+    public int getPerformanceId() { return performanceId; }
+    public void setPerformanceId(int performanceId) { this.performanceId = performanceId; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
+
+    @Override
+    public String toString() {
+        return String.format("Фестиваль{id=%d, company_id=%d, performance_id=%d, '%s' '%s' }", eventId, companyId, performanceId, address, date);
+    }
 }

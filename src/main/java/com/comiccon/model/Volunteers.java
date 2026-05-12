@@ -4,32 +4,32 @@ package com.comiccon.model;
  * Волонтеры
  */
 public class Volunteers {
-    private int volunteer_id;
-    private String last_name;
-    private String first_name;
+    private int volunteerId;
+    private String lastName;
+    private String firstName;
     private String patronymic;
     private String task;
 
     public Volunteers() {}
 
-    public Volunteers(int volunteer_id, String last_name, String patronymic, String first_name, String task) {
-        this.volunteer_id = volunteer_id;
-        this.last_name = last_name;
+    public Volunteers(int volunteerId, String lastName, String firstName, String patronymic, String task) {
+        this.volunteerId = volunteerId;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.patronymic = patronymic;
-        this.first_name = first_name;
         this.task = task;
     }
 
-    public Volunteers(String last_name, String patronymic, String first_name, String task) {
-        this(0, last_name, first_name, patronymic, task);
+    public Volunteers(String lastName, String firstName, String patronymic, String task) {
+        this(0, lastName, firstName, patronymic, task);
     }
 
-    public int getVolunteer_id() { return volunteer_id; }
-    public void setVolunteer_id(int volunteer_id) { this.volunteer_id = volunteer_id; }
-    public String getLast_name() { return last_name; }
-    public void setLast_name(String last_name) { this.last_name = last_name; }
-    public String getFirst_name() { return first_name; }
-    public void setFirst_name(String first_name) { this.first_name = first_name; }
+    public int getVolunteerId() { return volunteerId; }
+    public void setVolunteerId(int volunteerId) { this.volunteerId = volunteerId; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getPatronymic() { return patronymic; }
     public void setPatronymic(String patronymic) { this.patronymic = patronymic; }
     public String getTask() { return task; }
@@ -37,6 +37,6 @@ public class Volunteers {
 
     @Override
     public String toString() {
-        return String.format("Волонтер{id=%d, '%s %s %s', task: '%s'}", volunteer_id, last_name, first_name, patronymic);
+        return String.format("Волонтер{id=%d, '%s %s %s', task: '%s'}", volunteerId, lastName, firstName, patronymic);
     }
 }
