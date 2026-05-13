@@ -9,21 +9,23 @@ public class Fest {
     private int eventId;
     private int companyId;
     private int performanceId;
+    private int volunteerId;
     private String address;
     private LocalDate date;
 
     public Fest() { }
 
-    public Fest(int eventId, int companyId, int performanceId, String address, LocalDate date) {
+    public Fest(int eventId, int companyId, int performanceId, int volunteerId, String address, LocalDate date) {
         this.eventId = eventId;
         this.companyId = companyId;
         this.performanceId = performanceId;
+        this.volunteerId = volunteerId;
         this.address = address;
         this.date = date;
     }
 
-    public Fest(int companyId, int performanceId, String address, LocalDate date) {
-        this(0, companyId, performanceId, address, date);
+    public Fest(int companyId, int performanceId, int volunteerId, String address, LocalDate date) {
+        this(0, companyId, performanceId, volunteerId, address, date);
     }
 
     public int getEventId() { return eventId; }
@@ -36,6 +38,8 @@ public class Fest {
     public void setAddress(String address) { this.address = address; }
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
+    public int getVolunteerId() { return volunteerId; }
+    public void setVolunteerId(int volunteerId) { this.volunteerId = volunteerId; }
 
     @Override
     public String toString() {
