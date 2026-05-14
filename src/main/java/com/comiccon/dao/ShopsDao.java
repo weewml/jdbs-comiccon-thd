@@ -15,7 +15,7 @@ public class ShopsDao {
 
     // Поиск всех стендов-компаний
     public List<Shops> findAll() throws SQLException {
-        String sql = "SELECT company_id, artist_id, company_name, area, number_table FROM shops ORDER BY company_id";
+        String sql = "SELECT company_id, artist_id, company_name, area, number_table FROM comiccon.shops ORDER BY company_id";
         List<Shops> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -27,7 +27,7 @@ public class ShopsDao {
 
     // Поиск стенда-компании по айди
     public Optional<Shops> findById(int id) throws SQLException {
-        String sql = "SELECT company_id, artist_id, company_name, area, number_table FROM shops WHERE company_id = ?";
+        String sql = "SELECT company_id, artist_id, company_name, area, number_table FROM comiccon.shops WHERE company_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -39,7 +39,7 @@ public class ShopsDao {
 
     // Добавление нового стенда-компании
     public int insert(Shops shop) throws SQLException {
-        String sql = "INSERT INTO shops (artist_id, company_name, area, number_table) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO comiccon.shops (artist_id, company_name, area, number_table) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, shop.getArtistId());
@@ -60,7 +60,7 @@ public class ShopsDao {
 
     // Обновление художника, названия компании, площади, номера стола стенда-компании
     public boolean update(Shops shop) throws SQLException {
-        String sql = "UPDATE shops SET artist_id = ?, company_name = ?, area = ?, number_table = ? " +
+        String sql = "UPDATE comiccon.shops SET artist_id = ?, company_name = ?, area = ?, number_table = ? " +
                 "WHERE company_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -75,7 +75,7 @@ public class ShopsDao {
 
     // Удаление стенда-компании по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM shops WHERE company_id = ?";
+        String sql = "DELETE FROM comiccon.shops WHERE company_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

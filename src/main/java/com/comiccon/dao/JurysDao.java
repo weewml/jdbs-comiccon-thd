@@ -16,7 +16,7 @@ public class JurysDao {
 
     // Поиск всех жюри
     public List<Jurys> findAll() throws SQLException {
-        String sql = "SELECT jury_id, last_name, first_name, patronymic FROM jurys ORDER BY jury_id";
+        String sql = "SELECT jury_id, last_name, first_name, patronymic FROM comiccon.jurys ORDER BY jury_id";
         List<Jurys> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -28,7 +28,7 @@ public class JurysDao {
 
     // Поиск жюри по айди
     public Optional<Jurys> findById(int id) throws SQLException {
-        String sql = "SELECT jury_id, last_name, first_name, patronymic FROM jurys WHERE jury_id = ?";
+        String sql = "SELECT jury_id, last_name, first_name, patronymic FROM comiccon.jurys WHERE jury_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -40,7 +40,7 @@ public class JurysDao {
 
     // Добавление нового жюри
     public int insert(Jurys jury) throws SQLException {
-        String sql = "INSERT INTO jurys (last_name, first_name, patronymic) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO comiccon.jurys (last_name, first_name, patronymic) VALUES (?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, jury.getLastName());
@@ -60,7 +60,7 @@ public class JurysDao {
 
     // Обновление ФИО жюри
     public boolean update(Jurys jury) throws SQLException {
-        String sql = "UPDATE jurys SET last_name = ?, first_name = ?, patronymic = ? WHERE jury_id = ?";
+        String sql = "UPDATE comiccon.jurys SET last_name = ?, first_name = ?, patronymic = ? WHERE jury_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, jury.getLastName());
@@ -73,7 +73,7 @@ public class JurysDao {
 
     // Удаление жюри по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM jurys WHERE jury_id = ?";
+        String sql = "DELETE FROM comiccon.jurys WHERE jury_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

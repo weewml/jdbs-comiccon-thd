@@ -15,7 +15,7 @@ public class ArtistsDao {
 
     // Поиск всех художников
     public List<Artists> findAll() throws SQLException {
-        String sql = "SELECT artist_id, last_name, first_name, patronymic FROM artists ORDER BY artist_id";
+        String sql = "SELECT artist_id, last_name, first_name, patronymic FROM comiccon.artists ORDER BY artist_id";
         List<Artists> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -27,7 +27,7 @@ public class ArtistsDao {
 
     // Поиск художника по айди
     public Optional<Artists> findById(int id) throws SQLException {
-        String sql = "SELECT artist_id, last_name, first_name, patronymic FROM artists WHERE artist_id = ?";
+        String sql = "SELECT artist_id, last_name, first_name, patronymic FROM comiccon.artists WHERE artist_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -39,7 +39,7 @@ public class ArtistsDao {
 
     // Добавление нового художника
     public int insert(Artists artist) throws SQLException {
-        String sql = "INSERT INTO artists (last_name, first_name, patronymic) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO comiccon.artists (last_name, first_name, patronymic) VALUES (?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, artist.getLastName());
@@ -59,7 +59,7 @@ public class ArtistsDao {
 
     // Обновление ФИО художника
     public boolean update(Artists artist) throws SQLException {
-        String sql = "UPDATE artists SET last_name = ?, first_name = ?, patronymic = ? WHERE artist_id = ?";
+        String sql = "UPDATE comiccon.artists SET last_name = ?, first_name = ?, patronymic = ? WHERE artist_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, artist.getLastName());
@@ -72,7 +72,7 @@ public class ArtistsDao {
 
     // Удаление художника по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM artists WHERE artist_id = ?";
+        String sql = "DELETE FROM comiccon.artists WHERE artist_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

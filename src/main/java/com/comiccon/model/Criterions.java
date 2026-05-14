@@ -5,26 +5,26 @@ package com.comiccon.model;
  */
 public class Criterions {
     private int criterionId;
-    private int difficultMark;
-    private int artisticMark;
+    private double difficultMark;
+    private double artisticMark;
 
     public Criterions() {}
 
-    public Criterions(int criterionId, int difficultMark, int artisticMark) {
+    public Criterions(int criterionId, double difficultMark, double artisticMark) {
         this.criterionId = criterionId;
         this.difficultMark = difficultMark;
         this.artisticMark = artisticMark;
     }
 
-    public Criterions(int difficultMark, int artisticMark) {
+    public Criterions(double difficultMark, double artisticMark) {
         this(0, difficultMark, artisticMark);
     }
 
     public int getCriterionId() { return criterionId; }
     public void setCriterionId(int criterionId) { this.criterionId = criterionId; }
-    public int getDifficultMark() { return difficultMark; }
+    public double getDifficultMark() { return difficultMark; }
     public void setDifficultMark(int difficultMark) { this.difficultMark = difficultMark; }
-    public int getArtisticMark() { return artisticMark; }
+    public double getArtisticMark() { return artisticMark; }
     public void setArtisticMark(int artisticMark) { this.artisticMark = artisticMark; }
 
     @Override

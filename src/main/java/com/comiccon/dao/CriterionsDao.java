@@ -15,7 +15,7 @@ public class CriterionsDao {
 
     // Поиск всех критериев оценивания
     public List<Criterions> findAll() throws SQLException {
-        String sql = "SELECT criterion_id, difficult_mark, artistic_mark FROM criterions ORDER BY criterion_id";
+        String sql = "SELECT criterion_id, difficult_mark, artistic_mark FROM comiccon.criterions ORDER BY criterion_id";
         List<Criterions> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -27,7 +27,7 @@ public class CriterionsDao {
 
     // Поиск критериев оценивания по айди
     public Optional<Criterions> findById(int id) throws SQLException {
-        String sql = "SELECT criterion_id, difficult_mark, artistic_mark FROM criterions WHERE criterion_id = ?";
+        String sql = "SELECT criterion_id, difficult_mark, artistic_mark FROM comiccon.criterions WHERE criterion_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -39,11 +39,11 @@ public class CriterionsDao {
 
     // Добавление нового критерия оценивания
     public int insert(Criterions criterion) throws SQLException {
-        String sql = "INSERT INTO criterions (difficult_mark, artistic_mark) VALUES (?, ?)";
+        String sql = "INSERT INTO comiccon.criterions (difficult_mark, artistic_mark) VALUES (?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, criterion.getDifficultMark());
-            ps.setInt(2, criterion.getArtisticMark());
+            ps.setDouble(1, criterion.getDifficultMark());
+            ps.setDouble(2, criterion.getArtisticMark());
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -58,18 +58,18 @@ public class CriterionsDao {
 
     // Обновление сложности и артистичности критериев оценивания
     public boolean update(Criterions criterion) throws SQLException {
-        String sql = "UPDATE criterions SET difficult_mark = ?, artistic_mark = ? WHERE criterion_id = ?";
+        String sql = "UPDATE comiccon.criterions SET difficult_mark = ?, artistic_mark = ? WHERE criterion_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, criterion.getDifficultMark());
-            ps.setInt(2, criterion.getArtisticMark());
+            ps.setDouble(1, criterion.getDifficultMark());
+            ps.setDouble(2, criterion.getArtisticMark());
             return ps.executeUpdate() > 0;
         }
     }
 
     // Удаление критериев оценивания по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM criterions WHERE criterion_id = ?";
+        String sql = "DELETE FROM comiccon.criterions WHERE criterion_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -80,8 +80,8 @@ public class CriterionsDao {
     private Criterions mapRow(ResultSet rs) throws SQLException {
         return new Criterions(
                 rs.getInt("criterion_id"),
-                rs.getInt("difficult_mark"),
-                rs.getInt("artistic_mark")
+                rs.getDouble("difficult_mark"),
+                rs.getDouble("artistic_mark")
         );
     }
 }

@@ -15,7 +15,7 @@ public class MarksDao {
 
     // Поиск всех оценок
     public List<Marks> findAll() throws SQLException {
-        String sql = "SELECT mark_id, jury_id, criterion_id, performance_id FROM marks ORDER BY mark_id";
+        String sql = "SELECT mark_id, jury_id, criterion_id, performance_id FROM comiccon.marks ORDER BY mark_id";
         List<Marks> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -27,7 +27,7 @@ public class MarksDao {
 
     // Поиск оценки по айди
     public Optional<Marks> findById(int id) throws SQLException {
-        String sql = "SELECT mark_id, jury_id, criterion_id, performance_id FROM marks WHERE mark_id = ?";
+        String sql = "SELECT mark_id, jury_id, criterion_id, performance_id FROM comiccon.marks WHERE mark_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -39,7 +39,7 @@ public class MarksDao {
 
     // Добавление новой оценки
     public int insert(Marks mark) throws SQLException {
-        String sql = "INSERT INTO marks (jury_id, criterion_id, performance_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO comiccon.marks (jury_id, criterion_id, performance_id) VALUES (?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, mark.getJuryId());
@@ -59,7 +59,7 @@ public class MarksDao {
 
     // Обновление жюри, критериев оценивания, выступления оценки
     public boolean update(Marks mark) throws SQLException {
-        String sql = "UPDATE marks SET jury_id = ?, criterion_id = ?, performance_id = ? " +
+        String sql = "UPDATE comiccon.marks SET jury_id = ?, criterion_id = ?, performance_id = ? " +
                 "WHERE mark_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -73,7 +73,7 @@ public class MarksDao {
 
     // Удаление оценки по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM marks WHERE mark_id = ?";
+        String sql = "DELETE FROM comiccon.marks WHERE mark_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

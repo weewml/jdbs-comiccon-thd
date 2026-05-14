@@ -15,7 +15,7 @@ public class PerformancesDao {
 
     // Поиск всех выступлений
     public List<Performances> findAll() throws SQLException {
-        String sql = "SELECT performance_id, member_id, nomination, topic FROM performances ORDER BY performance_id";
+        String sql = "SELECT performance_id, member_id, nomination, topic FROM comiccon.performances ORDER BY performance_id";
         List<Performances> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -27,7 +27,7 @@ public class PerformancesDao {
 
     // Поиск выступления по айди
     public Optional<Performances> findById(int id) throws SQLException {
-        String sql = "SELECT performance_id, member_id, nomination, topic FROM performances WHERE performance_id = ?";
+        String sql = "SELECT performance_id, member_id, nomination, topic FROM comiccon.performances WHERE performance_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -39,7 +39,7 @@ public class PerformancesDao {
 
     // Добавление нового выступления
     public int insert(Performances performance) throws SQLException {
-        String sql = "INSERT INTO performances (member_id, nomination, topic) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO comiccon.performances (member_id, nomination, topic) VALUES (?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, performance.getMemberId());
@@ -59,7 +59,7 @@ public class PerformancesDao {
 
     // Обновление участника, номинации, темы выступления
     public boolean update(Performances performance) throws SQLException {
-        String sql = "UPDATE performances SET member_id = ?, nomination = ?, topic = ? " +
+        String sql = "UPDATE comiccon.performances SET member_id = ?, nomination = ?, topic = ? " +
                 "WHERE performance_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -73,7 +73,7 @@ public class PerformancesDao {
 
     // Удаление выступления по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM performances WHERE performance_id = ?";
+        String sql = "DELETE FROM comiccon.performances WHERE performance_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

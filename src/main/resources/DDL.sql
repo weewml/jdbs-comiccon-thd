@@ -3,15 +3,15 @@
 CREATE SCHEMA IF NOT EXISTS comiccon;
 
 -- Удаляем таблицы в порядке зависимостей (если существуют)
-DROP TABLE IF EXISTS fest CASCADE;
-DROP TABLE IF EXISTS marks CASCADE;
-DROP TABLE IF EXISTS performances CASCADE;
-DROP TABLE IF EXISTS criterions CASCADE;
-DROP TABLE IF EXISTS volunteers CASCADE;
-DROP TABLE IF EXISTS shops CASCADE;
-DROP TABLE IF EXISTS artists CASCADE;
-DROP TABLE IF EXISTS jurys CASCADE;
-DROP TABLE IF EXISTS members CASCADE;
+DROP TABLE IF EXISTS comiccon.fest CASCADE;
+DROP TABLE IF EXISTS comiccon.marks CASCADE;
+DROP TABLE IF EXISTS comiccon.performances CASCADE;
+DROP TABLE IF EXISTS comiccon.criterions CASCADE;
+DROP TABLE IF EXISTS comiccon.volunteers CASCADE;
+DROP TABLE IF EXISTS comiccon.shops CASCADE;
+DROP TABLE IF EXISTS comiccon.artists CASCADE;
+DROP TABLE IF EXISTS comiccon.jurys CASCADE;
+DROP TABLE IF EXISTS comiccon.members CASCADE;
 
 -- независимые таблицы (без FK)
 CREATE TABLE comiccon.members (

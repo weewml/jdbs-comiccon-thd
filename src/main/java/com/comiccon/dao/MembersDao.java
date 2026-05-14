@@ -17,7 +17,7 @@ public class MembersDao {
     // Поиск всех учатсников
     public List<Members> findAll() throws SQLException {
         String sql = "SELECT member_id, last_name, first_name, patronymic, hero, original_source " +
-                "FROM members ORDER BY member_id";
+                "FROM comiccon.members ORDER BY member_id";
         List<Members> result = new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -30,7 +30,7 @@ public class MembersDao {
     // Поиск участникво по айди
     public Optional<Members> findById(int id) throws SQLException {
         String sql = "SELECT member_id, last_name, first_name, patronymic, hero, original_source " +
-                "FROM members WHERE member_id = ?";
+                "FROM comiccon.members WHERE member_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -42,7 +42,7 @@ public class MembersDao {
 
     // Добавление нового участника
     public int insert(Members member) throws SQLException {
-        String sql = "INSERT INTO members (last_name, first_name, patronymic, hero, original_source) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO comiccon.members (last_name, first_name, patronymic, hero, original_source) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, member.getLastName());
@@ -64,7 +64,7 @@ public class MembersDao {
 
     // Обновление ФИО, героя и источника участника
     public boolean update(Members member) throws SQLException {
-        String sql = "UPDATE members SET last_name = ?, first_name = ?, patronymic = ?, hero = ?, original_source = ? " +
+        String sql = "UPDATE comiccon.members SET last_name = ?, first_name = ?, patronymic = ?, hero = ?, original_source = ? " +
                 "WHERE member_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -80,7 +80,7 @@ public class MembersDao {
 
     // Удаление участника по айди
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM members WHERE member_id = ?";
+        String sql = "DELETE FROM comiccon.members WHERE member_id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
