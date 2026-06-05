@@ -28,9 +28,16 @@ public class Main {
         boolean running = true;
 
         try {
+            // READ ALL TABLES
             crudDemo.readArtists();
             crudDemo.readCriterions();
             crudDemo.readFest();
+            crudDemo.readJurys();
+            crudDemo.readMarks();
+            crudDemo.readMembers();
+            crudDemo.readPerformances();
+            crudDemo.readShops();
+            crudDemo.readVolunteers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
