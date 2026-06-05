@@ -9,6 +9,11 @@ public class Performances {
     private String nomination;
     private String topic;
 
+    // доп поля для JOIN запросов
+    private String memberLastName;
+    private String memberFirstName;
+    private String memberHero;
+
     public Performances() { }
 
     public Performances(int performanceId, int memberId, String nomination, String topic) {
@@ -30,6 +35,14 @@ public class Performances {
     public void setNomination(String nomination) { this.nomination = nomination; }
     public String getTopic() { return topic; }
     public void setTopic(String topic) { this.topic = topic; }
+
+    // геттеры/сеттеры для JOIN
+    public String getMemberLastName() { return memberLastName; }
+    public void setMemberLastName(String memberLastName) { this.memberLastName = memberLastName; }
+    public String getMemberFirstName() { return memberFirstName; }
+    public void setMemberFirstName(String memberFirstName) { this.memberFirstName = memberFirstName; }
+    public String getMemberHero() { return memberHero; }
+    public void setMemberHero(String memberHero) { this.memberHero = memberHero; }
 
     @Override
     public String toString() {

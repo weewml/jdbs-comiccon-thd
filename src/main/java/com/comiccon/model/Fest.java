@@ -13,6 +13,12 @@ public class Fest {
     private String address;
     private LocalDate date;
 
+    // доп поля для JOIN запросов
+    private String companyName;
+    private String performanceTopic;
+    private String volunteerLastName;
+    private String volunteerTask;
+
     public Fest() { }
 
     public Fest(int eventId, int companyId, int performanceId, int volunteerId, String address, LocalDate date) {
@@ -40,6 +46,16 @@ public class Fest {
     public void setDate(LocalDate date) { this.date = date; }
     public int getVolunteerId() { return volunteerId; }
     public void setVolunteerId(int volunteerId) { this.volunteerId = volunteerId; }
+
+    // геттеры/сеттеры для JOIN
+    public String getCompanyName() { return companyName; }
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
+    public String getPerformanceTopic() { return performanceTopic; }
+    public void setPerformanceTopic(String performanceTopic) { this.performanceTopic = performanceTopic; }
+    public String getVolunteerLastName() { return volunteerLastName; }
+    public void setVolunteerLastName(String volunteerLastName) { this.volunteerLastName = volunteerLastName; }
+    public String getVolunteerTask() { return volunteerTask; }
+    public void setVolunteerTask(String volunteerTask) { this.volunteerTask = volunteerTask; }
 
     @Override
     public String toString() {

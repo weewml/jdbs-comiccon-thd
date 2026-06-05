@@ -10,6 +10,10 @@ public class Shops {
     private int area;
     private int numberTable;
 
+    // доп поля для JOIN запросов
+    private String artistLastName;
+    private String artistFirstName;
+
     public Shops() {}
 
     public Shops(int companyId, int artistId, String companyName, int area, int numberTable) {
@@ -34,6 +38,12 @@ public class Shops {
     public void setArea(int area) { this.area = area; }
     public int getNumberTable() { return numberTable; }
     public void setNumberTable(int numberTable) { this.numberTable = numberTable; }
+
+    // геттеры/сеттеры для JOIN
+    public String getArtistLastName() { return artistLastName; }
+    public void setArtistLastName(String artistLastName) { this.artistLastName = artistLastName; }
+    public String getArtistFirstName() { return artistFirstName; }
+    public void setArtistFirstName(String artistFirstName) { this.artistFirstName = artistFirstName; }
 
     @Override
     public String toString() {
