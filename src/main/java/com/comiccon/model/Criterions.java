@@ -23,9 +23,9 @@ public class Criterions {
     public int getCriterionId() { return criterionId; }
     public void setCriterionId(int criterionId) { this.criterionId = criterionId; }
     public double getDifficultMark() { return difficultMark; }
-    public void setDifficultMark(int difficultMark) { this.difficultMark = difficultMark; }
+    public void setDifficultMark(double difficultMark) { this.difficultMark = difficultMark; }
     public double getArtisticMark() { return artisticMark; }
-    public void setArtisticMark(int artisticMark) { this.artisticMark = artisticMark; }
+    public void setArtisticMark(double artisticMark) { this.artisticMark = artisticMark; }
 
     @Override
     public String toString() {
