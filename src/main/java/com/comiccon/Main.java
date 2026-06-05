@@ -29,15 +29,19 @@ public class Main {
 
         try {
             // READ ALL TABLES
-            crudDemo.readArtists();
-            crudDemo.readCriterions();
-            crudDemo.readFest();
-            crudDemo.readJurys();
-            crudDemo.readMarks();
-            crudDemo.readMembers();
-            crudDemo.readPerformances();
-            crudDemo.readShops();
-            crudDemo.readVolunteers();
+//            crudDemo.readArtists();
+//            crudDemo.readCriterions();
+//            crudDemo.readFest();
+//            crudDemo.readJurys();
+//            crudDemo.readMarks();
+//            crudDemo.readMembers();
+//            crudDemo.readPerformances();
+//            crudDemo.readShops();
+//            crudDemo.readVolunteers();
+            bizQuery.readShopsWithArtists();
+            bizQuery.readPerformancesWithMembers();
+            bizQuery.readMarksWithDetails();
+            bizQuery.readFestWithDetails();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
