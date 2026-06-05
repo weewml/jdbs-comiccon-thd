@@ -63,6 +63,7 @@ public class CriterionsDao {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setDouble(1, criterion.getDifficultMark());
             ps.setDouble(2, criterion.getArtisticMark());
+            ps.setInt(1, criterion.getCriterionId());
             return ps.executeUpdate() > 0;
         }
     }

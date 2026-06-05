@@ -37,6 +37,38 @@ public class MarksDao {
         }
     }
 
+    public List<Marks> findMarksWithDetails() throws SQLException {
+        String sql = """
+        SELECT mr.mark_id, mr.jury_id, mr.criterion_id, mr.performance_id,
+               p.topic AS performance_topic,
+               m.last_name AS member_last_name, m.hero AS member_hero,
+               c.difficult_mark, c.artistic_mark,
+               j.last_name AS jury_last_name
+        FROM comiccon.marks mr
+        JOIN comiccon.performances p ON p.performance_id = mr.performance_id
+        JOIN comiccon.members m ON m.member_id = p.member_id
+        JOIN comiccon.criterions c ON c.criterion_id = mr.criterion_id
+        JOIN comiccon.jurys j ON j.jury_id = mr.jury_id
+        ORDER BY mr.mark_id
+        """;
+        List<Marks> result = new ArrayList<>();
+        try (Connection conn = ConnectionManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Marks mark = mapRow(rs);
+                mark.setPerformanceTopic(rs.getString("performance_topic"));
+                mark.setMemberLastName(rs.getString("member_last_name"));
+                mark.setMemberHero(rs.getString("member_hero"));
+                mark.setDifficultMark(rs.getDouble("difficult_mark"));
+                mark.setArtisticMark(rs.getDouble("artistic_mark"));
+                mark.setJuryLastName(rs.getString("jury_last_name"));
+                result.add(mark);
+            }
+        }
+        return result;
+    }
+
     // Добавление новой оценки
     public int insert(Marks mark) throws SQLException {
         String sql = "INSERT INTO comiccon.marks (jury_id, criterion_id, performance_id) VALUES (?, ?, ?)";

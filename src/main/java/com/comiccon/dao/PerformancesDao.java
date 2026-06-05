@@ -37,6 +37,29 @@ public class PerformancesDao {
         }
     }
 
+    public List<Performances> findPerformancesWithMembers() throws SQLException {
+        String sql = """
+        SELECT p.performance_id, p.member_id, p.nomination, p.topic,
+               m.last_name AS member_last_name, m.first_name AS member_first_name, m.hero AS member_hero
+        FROM comiccon.performances p
+        JOIN comiccon.members m ON m.member_id = p.member_id
+        ORDER BY p.performance_id
+        """;
+        List<Performances> result = new ArrayList<>();
+        try (Connection conn = ConnectionManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Performances perf = mapRow(rs);
+                perf.setMemberLastName(rs.getString("member_last_name"));
+                perf.setMemberFirstName(rs.getString("member_first_name"));
+                perf.setMemberHero(rs.getString("member_hero"));
+                result.add(perf);
+            }
+        }
+        return result;
+    }
+
     // Добавление нового выступления
     public int insert(Performances performance) throws SQLException {
         String sql = "INSERT INTO comiccon.performances (member_id, nomination, topic) VALUES (?, ?, ?)";

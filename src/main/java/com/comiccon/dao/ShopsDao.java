@@ -37,6 +37,29 @@ public class ShopsDao {
         }
     }
 
+    // Показ всех записей с JOIN - ФИ художника
+    public List<Shops> findShopsWithArtists() throws SQLException {
+        String sql = """
+        SELECT s.company_id, s.artist_id, s.company_name, s.area, s.number_table,
+               a.last_name AS artist_last_name, a.first_name AS artist_first_name
+        FROM comiccon.shops s
+        JOIN comiccon.artists a ON a.artist_id = s.artist_id
+        ORDER BY s.company_id
+        """;
+        List<Shops> result = new ArrayList<>();
+        try (Connection conn = ConnectionManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Shops shop = mapRow(rs);
+                shop.setArtistLastName(rs.getString("artist_last_name"));
+                shop.setArtistFirstName(rs.getString("artist_first_name"));
+                result.add(shop);
+            }
+        }
+        return result;
+    }
+
     // Добавление нового стенда-компании
     public int insert(Shops shop) throws SQLException {
         String sql = "INSERT INTO comiccon.shops (artist_id, company_name, area, number_table) VALUES (?, ?, ?, ?)";

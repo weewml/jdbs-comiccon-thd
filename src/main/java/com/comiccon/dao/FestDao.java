@@ -39,6 +39,34 @@ public class FestDao {
         }
     }
 
+    public List<Fest> findFestWithDetails() throws SQLException {
+        String sql = """
+        SELECT f.event_id, f.company_id, f.performance_id, f.volunteer_id, f.address, f.date,
+               s.company_name,
+               p.topic AS performance_topic,
+               v.last_name AS volunteer_last_name, v.task AS volunteer_task
+        FROM comiccon.fest f
+        JOIN comiccon.shops s ON s.company_id = f.company_id
+        JOIN comiccon.performances p ON p.performance_id = f.performance_id
+        LEFT JOIN comiccon.volunteers v ON v.volunteer_id = f.volunteer_id
+        ORDER BY f.event_id
+        """;
+        List<Fest> result = new ArrayList<>();
+        try (Connection conn = ConnectionManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Fest fest = mapRow(rs);
+                fest.setCompanyName(rs.getString("company_name"));
+                fest.setPerformanceTopic(rs.getString("performance_topic"));
+                fest.setVolunteerLastName(rs.getString("volunteer_last_name"));
+                fest.setVolunteerTask(rs.getString("volunteer_task"));
+                result.add(fest);
+            }
+        }
+        return result;
+    }
+
     // Добавление нового мероприятия фестиваля
     public int insert(Fest fest) throws SQLException {
         String sql = "INSERT INTO comiccon.fest (company_id, performance_id, volunteer_id, address, date) VALUES (?, ?, ?, ?, ?)";
@@ -72,7 +100,7 @@ public class FestDao {
             ps.setInt(3, fest.getVolunteerId());
             ps.setString(4, fest.getAddress());
             ps.setDate(5, Date.valueOf(fest.getDate()));
-            ps.setInt(4, fest.getEventId());
+            ps.setInt(6, fest.getEventId());
             return ps.executeUpdate() > 0;
         }
     }
