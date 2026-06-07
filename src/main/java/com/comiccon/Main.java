@@ -35,9 +35,11 @@ public class Main {
                     case 0 -> running = false;
                     case 1 -> showAllTables();
                     case 2 -> showJoinQueries();
-                    case 3 -> searchMenu();
-                    case 4 -> updateMenu();
-                    case 5 -> deleteMenu();
+                    case 3 -> businessQueriesMenu();
+                    case 4 -> searchMenu();
+                    case 5 -> updateMenu();
+                    case 6 -> deleteMenu();
+
                     default -> System.out.println("Неверный ввод");
                 }
             } catch (SQLException e) {
@@ -52,9 +54,10 @@ public class Main {
         System.out.println("\n=== ГЛАВНОЕ МЕНЮ ===");
         System.out.println("1. Показать все таблицы");
         System.out.println("2. JOIN-запросы");
-        System.out.println("3. Найти запись по ID");
-        System.out.println("4. Обновить запись");
-        System.out.println("5. Удалить запись по ID");
+        System.out.println("3. Бизнес запросы");
+        System.out.println("4. Найти запись по ID");
+        System.out.println("5. Обновить запись");
+        System.out.println("6. Удалить запись по ID");
         System.out.println("0. Выход");
     }
 
@@ -235,6 +238,29 @@ public class Main {
             case 7 -> crud.deletePerformance(id);
             case 8 -> crud.deleteShop(id);
             case 9 -> crud.deleteVolunteer(id);
+        }
+    }
+
+    private static void businessQueriesMenu() throws SQLException {
+        System.out.println("\n=== БИЗНЕС-ЗАПРОСЫ ===");
+        System.out.println("1. Топ-5 участников по сумме баллов");
+        System.out.println("2. Волонтеры без мероприятий");
+        System.out.println("3. Мероприятия на конкретную дату");
+        System.out.println("4. Компании с площадью выше средней");
+        System.out.println("5. Статистика компаний");
+        System.out.println("0. Назад");
+        int choice = readInt("Выберите запрос: ");
+        switch (choice) {
+            case 1 -> bizQuery.top5MembersByMarks();
+            case 2 -> bizQuery.unUsedVolunteers();
+            case 3 -> {
+                LocalDate date = readLocalDateNullable("Введите дату (ГГГГ-ММ-ДД): ");
+                bizQuery.festByDate(date);
+            }
+            case 4 -> bizQuery.shopsAreaUpAvg();
+            case 5 -> bizQuery.companyWithEvents();
+            case 0 -> { return; }
+            default -> System.out.println("Неверный выбор");
         }
     }
 
