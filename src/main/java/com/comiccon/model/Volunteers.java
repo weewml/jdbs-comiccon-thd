@@ -37,6 +37,6 @@ public class Volunteers {
 
     @Override
     public String toString() {
-        return String.format("Волонтер{id=%d, '%s %s %s', task: '%s'}", volunteerId, lastName, firstName, patronymic);
+        return String.format("Волонтер{id=%d, '%s %s %s', task: '%s'}", volunteerId, lastName, firstName, patronymic, task);
     }
 }
